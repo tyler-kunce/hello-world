@@ -52,7 +52,7 @@ const App = () => {
           component={Start}
         />
         <Stack.Screen name='Chat'>
-          {props => <Chat db={db} {...props}/>}
+          {props => <Chat isConnected={connectionStatus.isConnected} db={db} {...props} />}
         </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
