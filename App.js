@@ -1,8 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import { initializeApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
-import { useState } from 'react';
+import { disableNetwork, enableNetwork, getFirestore } from 'firebase/firestore';
+import { useEffect } from 'react';
 import { Alert, LogBox, StyleSheet } from 'react-native';
+import { useNetInfo } from '@react-native-community/netinfo';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -16,6 +17,7 @@ LogBox.ignoreLogs(['AsyncStorage has been extracted from']);
 const Stack = createNativeStackNavigator();
 
 const App = () => {
+
   const firebaseConfig = {
     apiKey: "AIzaSyAj84VjCo9BJOwD-HicPAGD3TiFD7EJjdc",
     authDomain: "hello-world-8e66d.firebaseapp.com",
@@ -28,6 +30,17 @@ const App = () => {
   const app = initializeApp(firebaseConfig);
 
   const db = getFirestore(app);
+
+  const connectionStatus = useNetInfo();
+
+  useEffect(() => {
+    if (connectionStatus.isConnected === false) {
+      Alert.alert("Connection lost!");
+      disableNetwork(db);
+    } else if (connectionStatus.isConnected === true) {
+      enableNetwork(db);
+    }
+  }, [connectionStatus.isConnected]);
 
   return (
     <NavigationContainer>
