@@ -9,7 +9,16 @@ Enter React Native, a framework able to deliver Native-like apps on one codebase
 - A Chat page displaying the conversation as well as an input field & submit button.
 - The ability to send images and location data.
 - Online & online data caching.
-## Technologies Used
+## Technologies Used (Dependencies)
 - React Native
 - Expo
 - Android Studio (Android Emulator)
+- Google Firebase
+
+# Running it on your own
+- Clone the repository
+- Install Expo and Expo CLI on your Mac Terminal
+- Download Expo Go on your personal mobile device, or utilize an emulator (XCode for iPhone, Android Studio for Android)
+- Create an account with Google Firebase
+- Create a project with database and storage
+- Replace configuration code in App.js for your project
