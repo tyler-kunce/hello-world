@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { initializeApp } from 'firebase/app';
 import { disableNetwork, enableNetwork, getFirestore } from 'firebase/firestore';
+import { getStorage } from 'firebase/storage';
 import { useEffect } from 'react';
 import { Alert, LogBox, StyleSheet } from 'react-native';
 import { useNetInfo } from '@react-native-community/netinfo';
@@ -31,6 +32,8 @@ const App = () => {
 
   const db = getFirestore(app);
 
+  const storage = getStorage(app);
+
   const connectionStatus = useNetInfo();
 
   useEffect(() => {
@@ -52,7 +55,7 @@ const App = () => {
           component={Start}
         />
         <Stack.Screen name='Chat'>
-          {props => <Chat isConnected={connectionStatus.isConnected} db={db} {...props} />}
+          {props => <Chat isConnected={connectionStatus.isConnected} db={db} storage={storage} {...props} />}
         </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
